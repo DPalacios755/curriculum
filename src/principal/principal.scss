@@ -1,0 +1,1113 @@
+// ============================================
+// 1. VARIABLES
+// ============================================
+// Paleta de colores completa
+$inverse-surface: #faf8ff;
+$tertiary-container: #53ddfc;
+$on-secondary-container: #e9cdff;
+$on-surface: #dee5ff;
+$secondary-fixed: #e5c6ff;
+$on-error-container: #ffb2b9;
+$inverse-on-surface: #4d556b;
+$on-tertiary-fixed: #003640;
+$on-primary-container: #0a0081;
+$on-surface-variant: #a3aac4;
+$inverse-primary: #494bd7;
+$surface-variant: #192540;
+$primary-fixed: #9396ff;
+$tertiary: #8ce7ff;
+$surface: #060e20;
+$tertiary-fixed: #53ddfc;
+$error-container: #a70138;
+$secondary-dim: #9c48ea;
+$error: #ff6e84;
+$surface-dim: #060e20;
+$outline-variant: #40485d;
+$background: #060e20;
+$secondary-container: #6f00be;
+$on-error: #490013;
+$on-primary-fixed: #000000;
+$on-background: #dee5ff;
+$surface-container-lowest: #000000;
+$primary-dim: #6063ee;
+$on-secondary-fixed: #4f0089;
+$on-secondary-fixed-variant: #7511c3;
+$surface-container-low: #091328;
+$tertiary-fixed-dim: #40ceed;
+$secondary: #c180ff;
+$on-tertiary: #005464;
+$primary-container: #9396ff;
+$on-primary: #0f00a4;
+$primary-fixed-dim: #8387ff;
+$error-dim: #d73357;
+$outline: #6d758c;
+$secondary-fixed-dim: #dbb4ff;
+$on-tertiary-container: #004b58;
+$surface-container-highest: #192540;
+$surface-container: #0f1930;
+$surface-tint: #a3a6ff;
+$surface-container-high: #141f38;
+$on-primary-fixed-variant: #0e009d;
+$on-tertiary-fixed-variant: #005564;
+$primary: #a3a6ff;
+$on-secondary: #33005b;
+$surface-bright: #1f2b49;
+$tertiary-dim: #40ceed;
+
+// Bordes
+$border-radius: 0.25rem;
+$border-radius-lg: 0.5rem;
+$border-radius-xl: 0.75rem;
+$border-radius-full: 9999px;
+
+// Fuentes
+$font-headline: 'Manrope', sans-serif;
+$font-body: 'Inter', sans-serif;
+$font-label: 'Inter', sans-serif;
+
+// Breakpoints
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+
+// ============================================
+// 2. MIXINS
+// ============================================
+
+@mixin responsive($breakpoint) {
+  @if $breakpoint == md {
+    @media (min-width: $breakpoint-md) {
+      @content;
+    }
+  } @else if $breakpoint == lg {
+    @media (min-width: $breakpoint-lg) {
+      @content;
+    }
+  } @else if $breakpoint == xl {
+    @media (min-width: $breakpoint-xl) {
+      @content;
+    }
+  }
+}
+
+@mixin glass-panel {
+  background: rgba(25, 37, 64, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+// ============================================
+// 3. BASE / RESET
+// ============================================
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: $background; // para que todo sea oscuro
+}
+
+.container {
+  font-family: $font-body;
+  background-color: $background;
+  color: $on-background;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+  background: $background;
+}
+
+.text-gradient {
+  background: linear-gradient(45deg, $primary, $secondary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-primary {
+  color: $primary;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+}
+
+// ============================================
+// 4. NAVBAR
+// ============================================
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 50;
+  background: rgba(6, 14, 32, 0.6);
+  backdrop-filter: blur(24px);
+  box-shadow: 0 8px 32px 0 rgba(6, 14, 32, 0.3);
+
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    max-width: 80rem;
+    margin: 0 auto;
+  }
+
+  .logo {
+    font-family: $font-headline;
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: -0.025em;
+    color: $on-surface;
+  }
+
+  .nav-links {
+    display: none;
+
+    @include responsive(md) {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+  }
+
+  .nav-link {
+    color: rgba(222, 229, 255, 0.7);
+    font-weight: 500;
+    font-family: $font-headline;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &.active {
+      color: $primary;
+      font-weight: 700;
+      border-bottom: 2px solid $primary;
+      padding-bottom: 0.25rem;
+    }
+
+    &:hover {
+      color: $primary;
+    }
+  }
+}
+
+// ============================================
+// 5. BOTONES GLOBALES
+// ============================================
+
+.btn-primary {
+  background: linear-gradient(135deg, $primary, $primary-container);
+  color: $on-primary;
+  padding: 0.5rem 1.5rem;
+  border-radius: $border-radius-lg;
+  font-family: $font-headline;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.btn-large {
+  padding: 1rem 2rem;
+  border-radius: $border-radius-xl;
+  box-shadow: 0 4px 20px rgba(163, 166, 255, 0.2);
+}
+
+.btn-outline {
+  border: 1px solid $outline-variant;
+  background: transparent;
+  color: $on-surface;
+  padding: 1rem 2rem;
+  border-radius: $border-radius-xl;
+  font-family: $font-headline;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s;
+
+  &:hover {
+    background: $surface-variant;
+  }
+}
+
+.btn-block {
+  width: 100%;
+  padding: 1rem;
+  border-radius: $border-radius-xl;
+}
+
+// ============================================
+// 6. HERO SECTION
+// ============================================
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 5rem 2rem;
+  overflow: hidden;
+
+  .hero-bg-blur-1 {
+    position: absolute;
+    top: -10%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: $secondary;
+    opacity: 0.1;
+    filter: blur(120px);
+    border-radius: 50%;
+  }
+
+  .hero-bg-blur-2 {
+    position: absolute;
+    bottom: -10%;
+    left: -5%;
+    width: 400px;
+    height: 400px;
+    background: $primary;
+    opacity: 0.1;
+    filter: blur(100px);
+    border-radius: 50%;
+  }
+
+  .hero-container {
+    max-width: 80rem;
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
+
+    @include responsive(lg) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .hero-badge {
+    color: $tertiary;
+    font-family: $font-label;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+
+  .hero-title {
+    font-family: $font-headline;
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+
+    @include responsive(md) {
+      font-size: 4.5rem;
+    }
+  }
+
+  .hero-description {
+    color: $on-surface-variant;
+    font-size: 1.125rem;
+    max-width: 36rem;
+    margin-bottom: 2.5rem;
+    line-height: 1.625;
+
+    @include responsive(md) {
+      font-size: 1.25rem;
+    }
+  }
+
+  .hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+}
+
+// Imagen del héroe
+.image-card {
+  position: relative;
+  display: flex;
+  justify-content: center;
+
+  .image-glow {
+    position: absolute;
+    inset: -0.25rem;
+    background: linear-gradient(135deg, $primary, $secondary);
+    border-radius: $border-radius-xl;
+    filter: blur(8px);
+    opacity: 0.25;
+    transition: opacity 0.5s;
+  }
+
+  &:hover .image-glow {
+    opacity: 0.5;
+  }
+
+  .image-wrapper {
+    position: relative;
+    width: 18rem;
+    height: 24rem;
+    border-radius: $border-radius-xl;
+    overflow: hidden;
+    background: $surface-container-low;
+
+    @include responsive(md) {
+      width: 24rem;
+      height: 31.25rem;
+    }
+  }
+
+  .portrait-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+    transition: filter 0.5s;
+
+    &:hover {
+      filter: grayscale(0%);
+    }
+  }
+
+  .floating-card {
+    position: absolute;
+    bottom: -1.5rem;
+    left: -1.5rem;
+    @include glass-panel;
+    padding: 1.5rem;
+    border-radius: $border-radius-xl;
+    border: 1px solid rgba(64, 72, 93, 0.2);
+    display: none;
+
+    @include responsive(md) {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .verified-icon {
+      font-variation-settings: 'FILL' 1;
+      color: $tertiary;
+    }
+
+    .floating-label {
+      font-size: 0.75rem;
+      color: $on-surface-variant;
+      text-transform: uppercase;
+      letter-spacing: -0.025em;
+      font-weight: 700;
+    }
+
+    .floating-value {
+      font-size: 1.5rem;
+      font-family: $font-headline;
+      font-weight: 900;
+    }
+  }
+}
+
+// ============================================
+// 7. ABOUT SECTION
+// ============================================
+
+.about {
+  padding: 8rem 2rem;
+  background: $surface-container-low;
+
+  .about-container {
+    max-width: 80rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+
+    @include responsive(lg) {
+      grid-template-columns: 1fr 2fr;
+    }
+  }
+
+  .about-title {
+    font-family: $font-headline;
+    font-size: 2.25rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    margin-bottom: 2rem;
+  }
+
+  .about-divider {
+    width: 5rem;
+    height: 0.25rem;
+    background: $tertiary;
+    border-radius: $border-radius-full;
+  }
+
+  .about-quote {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: $on-surface;
+    line-height: 1.3;
+    margin-bottom: 2rem;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+
+    @include responsive(md) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .about-card {
+    padding: 2rem;
+    border-radius: $border-radius-xl;
+    background: $surface-container-high;
+    border: 1px solid rgba(64, 72, 93, 0.1);
+
+    .about-card-title {
+      font-family: $font-headline;
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .secondary-icon {
+      color: $secondary;
+    }
+
+    .tertiary-icon {
+      color: $tertiary;
+    }
+
+    .about-card-text {
+      color: $on-surface-variant;
+      font-size: 0.875rem;
+      line-height: 1.625;
+    }
+  }
+}
+
+// ============================================
+// 8. EXPERIENCE SECTION
+// ============================================
+
+.experience {
+  padding: 8rem 2rem;
+
+  .experience-container {
+    max-width: 80rem;
+    margin: 0 auto;
+  }
+
+  .experience-header {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+
+  .experience-title {
+    font-family: $font-headline;
+    font-size: 2.25rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    margin-bottom: 1rem;
+  }
+
+  .experience-subtitle {
+    color: $on-surface-variant;
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 2rem;
+    border-radius: $border-radius-xl;
+    transition: background 0.3s;
+
+    &:hover {
+      background: $surface-container-low;
+    }
+
+    @include responsive(md) {
+      grid-template-columns: 3fr 9fr;
+    }
+  }
+
+  .date-primary {
+    color: $primary;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .date-role {
+    font-size: 0.875rem;
+    color: $on-surface-variant;
+  }
+
+  .timeline-company {
+    font-size: 1.5rem;
+    font-family: $font-headline;
+    font-weight: 700;
+    color: $on-surface;
+    margin-bottom: 1rem;
+    transition: color 0.2s;
+  }
+
+  .timeline-item:hover .timeline-company {
+    color: $primary;
+  }
+
+  .timeline-description {
+    color: $on-surface-variant;
+    line-height: 1.625;
+    margin-bottom: 1rem;
+  }
+
+  .timeline-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    padding: 0.25rem 0.75rem;
+    background: $surface-container-highest;
+    font-size: 0.75rem;
+    border-radius: $border-radius-full;
+    border: 1px solid rgba(64, 72, 93, 0.2);
+  }
+}
+
+// ============================================
+// 9. SKILLS SECTION (BENTO GRID)
+// ============================================
+
+.skills {
+  padding: 8rem 2rem;
+  background: $surface-container-lowest;
+
+  .skills-container {
+    max-width: 80rem;
+    margin: 0 auto;
+  }
+
+  .skills-header {
+    margin-bottom: 4rem;
+  }
+
+  .skills-title {
+    font-family: $font-headline;
+    font-size: 2.25rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+  }
+
+  .skills-subtitle {
+    color: $on-surface-variant;
+    margin-top: 0.5rem;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+
+    @include responsive(md) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    @include responsive(lg) {
+      grid-template-columns: repeat(6, 1fr);
+    }
+  }
+
+  .skill-card-wide {
+    grid-column: span 2;
+    background: $surface-container-low;
+    padding: 2rem;
+    border-radius: $border-radius-xl;
+    border: 1px solid rgba(64, 72, 93, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .skill-icon-large {
+      font-size: 2.25rem;
+      color: $primary;
+      margin-bottom: 3rem;
+    }
+  }
+
+  .skill-card-title {
+    font-family: $font-headline;
+    font-weight: 900;
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .skill-card-subtitle {
+    font-size: 0.75rem;
+    color: $on-surface-variant;
+    text-transform: uppercase;
+  }
+
+  .skill-card-center {
+    background: $surface-container-low;
+    padding: 2rem;
+    border-radius: $border-radius-xl;
+    border: 1px solid rgba(64, 72, 93, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: background 0.2s;
+
+    &:hover {
+      background: $primary;
+
+      .skill-icon {
+        color: $surface;
+      }
+    }
+
+    .skill-icon {
+      font-size: 1.75rem;
+    }
+
+    .skill-label {
+      font-size: 0.75rem;
+      margin-top: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+  }
+
+  .skill-card-horizontal {
+    grid-column: span 2;
+    background: $surface-container-high;
+    padding: 2rem;
+    border-radius: $border-radius-xl;
+    border: 1px solid rgba(64, 72, 93, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+
+    .skill-icon-bg {
+      width: 4rem;
+      height: 4rem;
+      border-radius: $border-radius-xl;
+      background: $surface;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .skill-card-progress {
+    grid-column: span 2;
+    background: $surface-container-low;
+    padding: 2rem;
+    border-radius: $border-radius-xl;
+    border: 1px solid rgba(64, 72, 93, 0.1);
+    display: flex;
+    align-items: flex-end;
+
+    .progress-header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+
+    .progress-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .progress-value {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: $primary;
+    }
+
+    .progress-bar {
+      height: 0.25rem;
+      width: 100%;
+      background: $surface-variant;
+      border-radius: $border-radius-full;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: $primary;
+    }
+  }
+}
+
+// ============================================
+// 10. PROJECTS SECTION
+// ============================================
+
+.projects {
+  padding: 8rem 2rem;
+
+  .projects-container {
+    max-width: 80rem;
+    margin: 0 auto;
+  }
+
+  .projects-title {
+    font-family: $font-headline;
+    font-size: 2.25rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    margin-bottom: 4rem;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+
+    @include responsive(lg) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .project-card {
+    cursor: pointer;
+
+    &.offset {
+      @include responsive(lg) {
+        margin-top: 6rem;
+      }
+    }
+
+    .project-image-wrapper {
+      position: relative;
+      border-radius: $border-radius-xl;
+      overflow: hidden;
+      aspect-ratio: 16 / 10;
+      background: $surface-container-low;
+      margin-bottom: 1.5rem;
+
+      .project-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.7s;
+      }
+
+      .project-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, $surface, transparent);
+        opacity: 0.6;
+        transition: opacity 0.3s;
+      }
+
+      .project-badge {
+        position: absolute;
+        bottom: 1.5rem;
+        left: 1.5rem;
+        padding: 0.25rem 1rem;
+        @include glass-panel;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        border-radius: $border-radius-full;
+      }
+    }
+
+    &:hover {
+      .project-image {
+        transform: scale(1.1);
+      }
+
+      .project-overlay {
+        opacity: 0.2;
+      }
+    }
+
+    .project-name {
+      font-size: 1.5rem;
+      font-family: $font-headline;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      transition: color 0.2s;
+
+      &.alt {
+        &:hover {
+          color: $secondary;
+        }
+      }
+    }
+
+    &:hover .project-name:not(.alt) {
+      color: $primary;
+    }
+
+    .project-description {
+      color: $on-surface-variant;
+      font-size: 0.875rem;
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  }
+}
+
+// ============================================
+// 11. CONTACT SECTION
+// ============================================
+
+.contact {
+  padding: 8rem 2rem;
+  background: $surface-container-low;
+  position: relative;
+
+  .contact-container {
+    max-width: 56rem;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .contact-title {
+    font-family: $font-headline;
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    margin-bottom: 2rem;
+
+    @include responsive(md) {
+      font-size: 3.75rem;
+    }
+  }
+
+  .contact-subtitle {
+    color: $on-surface-variant;
+    font-size: 1.125rem;
+    margin-bottom: 3rem;
+    max-width: 42rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: left;
+
+    @include responsive(md) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .contact-form-wrapper {
+    padding: 2rem;
+    @include glass-panel;
+    border-radius: $border-radius-xl;
+    border: 1px solid rgba(64, 72, 93, 0.1);
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .form-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: $on-surface-variant;
+  }
+
+  .form-input,
+  .form-textarea {
+    width: 100%;
+    background: $surface-container-lowest;
+    border: 1px solid rgba(64, 72, 93, 0.2);
+    border-radius: $border-radius-xl;
+    padding: 0.75rem 1rem;
+    color: $on-surface;
+    font-family: $font-body;
+    transition: all 0.2s;
+
+    &:focus {
+      outline: none;
+      border-color: $tertiary;
+    }
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem 0;
+  }
+
+  .contact-section-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: $primary;
+    margin-bottom: 0.5rem;
+  }
+
+  .social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .social-link {
+    font-size: 1.5rem;
+    font-family: $font-headline;
+    font-weight: 700;
+    color: $on-surface;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.2s;
+
+    &:hover {
+      color: $tertiary;
+    }
+
+    .arrow-icon {
+      font-size: 1.25rem;
+    }
+  }
+
+  .email-link {
+    font-size: 1.25rem;
+    font-family: $font-headline;
+    font-weight: 700;
+    color: $on-surface;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// ============================================
+// 12. FOOTER
+// ============================================
+
+.footer {
+  background: $surface;
+  width: 100%;
+  padding: 3rem 2rem;
+
+  .footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    max-width: 80rem;
+    margin: 0 auto;
+    border-top: 1px solid $surface-container-high;
+    padding-top: 3rem;
+
+    @include responsive(md) {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+
+  .footer-logo {
+    font-family: $font-headline;
+    font-size: 1rem;
+    font-weight: 700;
+    color: $on-surface;
+  }
+
+  .footer-copyright {
+    font-family: $font-body;
+    font-size: 0.75rem;
+    color: rgba(222, 229, 255, 0.5);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .footer-link {
+    color: rgba(222, 229, 255, 0.4);
+    text-decoration: none;
+    font-family: $font-body;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+
+    &:hover {
+      color: $primary;
+      transform: scale(1.1);
+    }
+  }
+}
+
+// ============================================
+// 13. UTILIDADES ADICIONALES
+// ============================================
+
+// Glass panel utility (por si se necesita fuera de los componentes)
+.glass-panel {
+  @include glass-panel;
+}
