@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { Principal } from '../principal/principal';
+import { Principal } from './principal/principal';
 
 export const routes: Routes = [
     { path: '', component: Principal },  //Ruta principal
